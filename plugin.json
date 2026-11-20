@@ -1,0 +1,7 @@
+{
+  "name": "agentsmd-lazyload",
+  "version": "0.1.0",
+  "description": "Lazily injects nested AGENTS.md files into Codex's context the first time a tool call touches their folder.",
+  "license": "MIT",
+  "repository": "https://github.com/LeeGyeongPil/agentsmd-lazyload"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "agentsmd-lazyload",
+  "version": "0.1.0",
+  "description": "Codex hook that lazily injects nested AGENTS.md files into the model context the first time a tool call touches their folder.",
+  "keywords": ["codex", "agents-md", "hooks", "monorepo", "openai-codex", "cli"],
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "agentsmd-lazyload": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "hooks",
+    "plugin.json",
+    "README.md",
+    "README.ko.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeGyeongPil/agentsmd-lazyload.git"
+  },
+  "homepage": "https://github.com/LeeGyeongPil/agentsmd-lazyload#readme",
+  "bugs": {
+    "url": "https://github.com/LeeGyeongPil/agentsmd-lazyload/issues"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "start": "npm run build --silent && node dist/cli.js demo --lang en",
+    "test": "npm run build --silent && vitest run --exclude test/conformance.test.ts",
+    "test:conformance": "npm run build --silent && vitest run test/conformance.test.ts"
+  },
+  "dependencies": {
+    "smol-toml": "1.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2",
+    "vitest": "5.1.1"
+  }
+}
