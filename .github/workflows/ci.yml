@@ -1,0 +1,26 @@
+# No keys, no model, no Codex login needed: tests run on example repos created in temp folders.
+name: ci
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 3 * * 1"   # weekly: catch breakage from dependency or runtime updates
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm start
+      - run: npm run test:conformance   # prints "skipped: codex not found" when Codex is not installed
