@@ -214,7 +214,7 @@ The repo root also holds a Codex plugin bundle: `plugin.json` (name, version, de
 ```bash
 npm install                # builds dist/
 npm test                   # 106 tests
-npm run test:conformance   # needs codex on PATH, otherwise prints "skipped: codex not found"
+npm run test:conformance   # needs codex with `debug prompt-input` on PATH, otherwise prints "skipped: ..." (not found, or no such command)
 ```
 
 Release notes are in [CHANGELOG.md](CHANGELOG.md).

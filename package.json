@@ -1,6 +1,6 @@
 {
   "name": "agentsmd-lazyload",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Codex hook that lazily injects nested AGENTS.md files into the model context the first time a tool call touches their folder.",
   "keywords": ["codex", "agents-md", "hooks", "monorepo", "openai-codex", "cli"],
   "license": "MIT",

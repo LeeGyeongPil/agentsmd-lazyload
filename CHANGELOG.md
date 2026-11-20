@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-11-21
+
+### Fixed
+
+- CI: the moved-checkout install test no longer links `node_modules` (safe on every platform), the conformance test is skipped when the `codex` on `PATH` lacks `debug prompt-input`, and the workflow has a 15 minute timeout.
+
 ## [0.1.0] - 2026-11-20
 
 ### Added

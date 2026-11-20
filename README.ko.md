@@ -214,7 +214,7 @@ sequenceDiagram
 ```bash
 npm install                # dist/ 빌드
 npm test                   # 테스트 106개
-npm run test:conformance   # codex 가 PATH 에 있어야 함, 없으면 "skipped: codex not found" 출력
+npm run test:conformance   # `debug prompt-input` 을 지원하는 codex 가 PATH 에 있어야 함, 아니면 "skipped: ..." 출력(없음 또는 명령 없음)
 ```
 
 변경 기록은 [CHANGELOG.md](CHANGELOG.md).
