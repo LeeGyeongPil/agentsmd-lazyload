@@ -249,12 +249,15 @@ describe("moved or deleted checkout (AC-7)", () => {
   });
 
   it("end to end with the built CLI: install from copy A, delete A, install from B, uninstall", () => {
-    // copy A: dist + package.json, node_modules linked to this checkout's
+    // copy A: dist + package.json + its own copy of the one runtime dependency.
+    // 이 체크아웃의 node_modules 를 링크하지 않는다 — 아래에서 copyA 를 통째로 지우므로,
+    // 링크를 두면 삭제가 실제 node_modules 를 건드릴 위험이 생긴다(플랫폼마다 rm 구현이 다르다)
     const copyA = path.join(sb.tmp, "copyA-moved");
     fs.mkdirSync(copyA);
     fs.cpSync(path.join(root, "dist"), path.join(copyA, "dist"), { recursive: true });
     fs.copyFileSync(path.join(root, "package.json"), path.join(copyA, "package.json"));
-    fs.symlinkSync(path.join(root, "node_modules"), path.join(copyA, "node_modules"), "dir");
+    const toml = path.join("node_modules", "smol-toml");
+    fs.cpSync(path.join(root, toml), path.join(copyA, toml), { recursive: true, dereference: true });
     const env = { ...process.env, ...sb.env, PATH: "" } as NodeJS.ProcessEnv;
     const cli = (script: string, ...args: string[]) =>
       spawnSync(process.execPath, [script, ...args], { env, cwd: sb.repo, encoding: "utf8" });

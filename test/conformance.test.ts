@@ -6,9 +6,13 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { resolve } from "../src/resolve.js";
 import { CFG, makeSandbox, type Sandbox } from "./helpers.js";
 
-const probe = spawnSync("codex", ["--version"], { encoding: "utf8" });
-const available = probe.status === 0;
-if (!available) console.log("skipped: codex not found");
+const probe = spawnSync("codex", ["--version"], { encoding: "utf8", timeout: 60000 });
+// 다른 버전의 codex 가 PATH 에 있어도 비교 명령(debug prompt-input)이 없으면 실패 대신 건너뛴다
+const canPrompt =
+  probe.status === 0 && spawnSync("codex", ["debug", "prompt-input", "--help"], { encoding: "utf8", timeout: 60000 }).status === 0;
+const available = probe.status === 0 && canPrompt;
+if (probe.status !== 0) console.log("skipped: codex not found");
+else if (!canPrompt) console.log("skipped: " + probe.stdout.trim() + " has no 'debug prompt-input'");
 else console.log("codex: " + probe.stdout.trim());
 
 let sb: Sandbox;

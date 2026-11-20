@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15   # stop a hung run early instead of after the 6-hour default
     strategy:
       fail-fast: false
       matrix:
